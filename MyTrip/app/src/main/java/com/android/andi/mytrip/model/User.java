@@ -2,6 +2,7 @@ package com.android.andi.mytrip.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -27,13 +28,15 @@ public class User {
 
     private String email;
     private String password;
+    private String photoUrl;
 
-    public User(long userId, String fName, String lName, String email, String password){
+    public User(long userId, String fName, String lName, String email, String password, String photoUrl){
         this.userId = userId;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.password = password;
+        this.photoUrl = photoUrl;
     }
 
     public long getUserId() {
@@ -74,6 +77,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override

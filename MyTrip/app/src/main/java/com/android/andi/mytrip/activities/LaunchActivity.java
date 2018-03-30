@@ -22,7 +22,7 @@ public class LaunchActivity extends AppCompatActivity {
         userState = mApp.getPreference().getAppState(LaunchActivity.this);
 
         if(userState){
-            startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+            startActivity(new Intent(LaunchActivity.this, SignUpActivity.class));
             finish();
         }else{
             startActivity(new Intent(LaunchActivity.this, SignInActivity.class));
