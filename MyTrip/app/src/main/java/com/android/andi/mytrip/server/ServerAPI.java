@@ -9,6 +9,7 @@ import com.loopj.android.http.BuildConfig;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -102,6 +103,17 @@ public class ServerAPI {
         return ServerAPI.SERVER_BASE_URL + relativeUrl;
     }
 
+    public static void CreateUser(Context context, String username, String email, String password, ServerResponseCallback callback){
+        String url = "/user";
 
+        try{
+            JSONObject top = new JSONObject();
+            top.put("username", username);
+            top.put("email", email);
+            top.put("password",password);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
 
 }

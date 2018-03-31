@@ -1,5 +1,6 @@
 package com.android.andi.mytrip.activities;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,13 @@ import com.android.andi.mytrip.R;
 import com.android.andi.mytrip.application.MyTrip;
 import com.android.andi.mytrip.asynctasks.CreateUserTask;
 
+import java.security.Signer;
+
 public class SignUpActivity extends AppCompatActivity {
     private MyTrip myTrip;
 
     //UI references
-    private EditText mFirstNameView;
-    private EditText mLastNameView;
+    private EditText mUserNameView;
     private EditText mEmailView;
     private EditText mPasswordView;
     private Button mSignUpButton;
@@ -37,8 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         myTrip = (MyTrip) getApplicationContext();
         setUpActionBar();
-        mFirstNameView = findViewById(R.id.first_name);
-        mLastNameView = findViewById(R.id.last_name);
+        mUserNameView = findViewById(R.id.username);
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
         mSignUpButton = findViewById(R.id.btn_signup);
@@ -66,30 +67,24 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void attemptSignUp(){
-        mFirstNameView.setError(null);
-        mLastNameView.setError(null);
+        mUserNameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
         //Stores values at the time of the login attempt
-        String firstName = mFirstNameView.getText().toString();
-        String lastName = mLastNameView.getText().toString();
+        String userName = mUserNameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        if(TextUtils.isEmpty(firstName)){
-            mFirstNameView.setError("This field is required");
-            focusView = mFirstNameView;
-            cancel = true;
-        } else if(TextUtils.isEmpty(lastName)){
-            mFirstNameView.setError("This field is required");
-            focusView = mLastNameView;
+        if(TextUtils.isEmpty(userName)){
+            mUserNameView.setError("This field is required");
+            focusView = mUserNameView;
             cancel = true;
         } else if(TextUtils.isEmpty(email)){
-            mFirstNameView.setError("This field is required");
+            mEmailView.setError("This field is required");
             focusView = mEmailView;
             cancel = true;
         } else if(!isEmailValid(email)){
@@ -110,8 +105,10 @@ public class SignUpActivity extends AppCompatActivity {
             focusView.requestFocus();
         }else {
             CreateUserTask createUserTask = new CreateUserTask();
-            createUserTask.execute(firstName, lastName, email, password);
+            createUserTask.execute(userName, email, password);
         }
+
+        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
 
 
     }

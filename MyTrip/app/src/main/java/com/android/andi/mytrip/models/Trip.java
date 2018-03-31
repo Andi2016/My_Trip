@@ -8,7 +8,6 @@ public class Trip {
     private long id;
     private String name;
     private long userId;
-    private String Destination;
+    private String destination;
     private String description;
-    private Activity activity;
 }
