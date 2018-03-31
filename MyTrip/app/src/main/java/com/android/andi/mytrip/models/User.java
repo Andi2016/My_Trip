@@ -1,8 +1,6 @@
-package com.android.andi.mytrip.model;
+package com.android.andi.mytrip.models;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -12,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 
 //Room uses the class name as the default database table name
-@Entity(indices = {@Index(value = {"firstName", "lastName"}, unique = true)})
+@Entity(indices = {@Index(value = {"fName", "lName"}, unique = true)})
 public class User {
 
     @PrimaryKey
@@ -20,12 +18,8 @@ public class User {
 
     //Add @ColumnInfo annotation to a field to set a different column name in the database
 
-    @ColumnInfo (name = "firstName")
-    private String fName;
-
-    @ColumnInfo (name = "lastName")
-    private String lName;
-
+    public String fName;
+    public String lName;
     private String email;
     private String password;
     private String photoUrl;
@@ -47,7 +41,7 @@ public class User {
         this.userId = userId;
     }
 
-    public String getfName() {
+    public String getfName(){
         return fName;
     }
 

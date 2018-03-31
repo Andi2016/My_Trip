@@ -1,4 +1,4 @@
-package com.android.andi.mytrip.model;
+package com.android.andi.mytrip.models;
 
 /**
  * Created by Andi Xu on 3/30/18.

@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.android.andi.mytrip.model.User;
+import com.android.andi.mytrip.models.User;
 
 /**
  * Created by Andi Xu on 3/30/18.
@@ -14,6 +14,11 @@ import com.android.andi.mytrip.model.User;
 
 @Dao
 public interface MyDao {
+
+    /**
+     * Operations with "User Table"
+     * @param users
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertUsers(User... users);
 
@@ -28,4 +33,6 @@ public interface MyDao {
 
     @Delete
     public void deleteUser(User user);
+
+
 }

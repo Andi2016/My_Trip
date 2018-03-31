@@ -1,4 +1,4 @@
-package com.android.andi.mytrip.model;
+package com.android.andi.mytrip.models;
 
 import java.util.Date;
 

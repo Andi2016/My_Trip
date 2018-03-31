@@ -1,6 +1,8 @@
 package com.android.andi.mytrip.activities;
 
 
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,13 +14,20 @@ import android.view.MenuItem;
 import com.android.andi.mytrip.Fragments.BusinessListFragment;
 import com.android.andi.mytrip.Fragments.TripListFragment;
 import com.android.andi.mytrip.R;
+import com.android.andi.mytrip.application.MyTrip;
+import com.android.andi.mytrip.database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
+    private MyTrip myTrip;
+    public static AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myTrip = (MyTrip) getApplicationContext();
+        appDatabase = Room.databaseBuilder(myTrip, AppDatabase.class, "My-db").build();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
