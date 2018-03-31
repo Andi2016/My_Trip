@@ -109,6 +109,8 @@ public class SignUpActivity extends AppCompatActivity {
         if(cancel){
             focusView.requestFocus();
         }else {
+            CreateUserTask createUserTask = new CreateUserTask();
+            createUserTask.execute(firstName, lastName, email, password);
         }
 
 

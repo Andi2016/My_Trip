@@ -9,7 +9,7 @@ import com.android.andi.mytrip.models.User;
  * Created by Andi Xu on 3/30/18.
  */
 
-public class CreateUserTask extends AsyncTask <String, Integer, String> {
+public class CreateUserTask extends AsyncTask <String, Void, Void> {
 
     @Override
     protected void onPreExecute(){
@@ -19,17 +19,18 @@ public class CreateUserTask extends AsyncTask <String, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
         User user = new User(0,params[0],params[1],params[2],params[3],params[4]);
         MainActivity.appDatabase.myDao().insertUser(user);
         return null;
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
+    protected void onPostExecute(Void avoid) {
+        super.onPostExecute(avoid);
         this.cancel(false);
     }
+    
 
 
 }
