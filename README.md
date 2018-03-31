@@ -7,4 +7,4 @@
 - Implemented user authentication with Spring Security.
 
 - Developed ReactJS web interface and Android app that both implement REST API calls.
--- API details: https://app.swaggerhub.com/apis/yizhang61/MyTrip/1.0.0
+    - API details: https://app.swaggerhub.com/apis/yizhang61/MyTrip/1.0.0
