@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.andi.mytrip.R;
+import com.android.andi.mytrip.models.Business;
 
 
 public class BusinessListFragment extends Fragment {
@@ -28,5 +29,10 @@ public class BusinessListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_business_list, container, false);
+    }
+
+    public interface OnListFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onListFragmentInteraction(Business item);
     }
 }

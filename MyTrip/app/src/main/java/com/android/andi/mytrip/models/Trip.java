@@ -7,7 +7,7 @@ package com.android.andi.mytrip.models;
 public class Trip {
     private long id;
     private String name;
-    private long userId;
+    private String username;
     private String destination;
     private String description;
 }

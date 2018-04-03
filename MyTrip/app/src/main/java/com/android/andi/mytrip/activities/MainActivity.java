@@ -4,6 +4,7 @@ package com.android.andi.mytrip.activities;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = TripListFragment.newInstance();
+                                selectedFragment = BusinessListFragment.newInstance();;
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BusinessListFragment.newInstance();
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, TripListFragment.newInstance());
         transaction.commit();
+
+
     }
 
 
