@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.android.andi.mytrip.R;
 import com.android.andi.mytrip.application.MyTrip;
 import com.android.andi.mytrip.models.Business;
+import com.android.andi.mytrip.server.ServerAPI;
 import com.android.andi.mytrip.utils.GetImageByUrl;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,7 +51,9 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
 
     private TextView business_address;
 
-    private Button business_add_review;
+    private EditText business_personal_review;
+
+    private Button btn_Submit;
 
     private Business mBusiness;
 
@@ -74,7 +78,10 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
         business_personal_rating = findViewById(R.id.business_personal_rating);
         business_phone = findViewById(R.id.business_phone);
         business_address = findViewById(R.id.business_address);
-        business_add_review = findViewById(R.id.business);
+        business_personal_review = findViewById(R.id.business_add_review);
+        btn_Submit = findViewById(R.id.btn_submit);
+
+
 
         Intent intent = getIntent();
         mBusiness = intent.getParcelableExtra("business");
@@ -103,6 +110,13 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
                 Intent intent = new Intent(getApplicationContext(), ReviewListActivity.class);
                 intent.putExtra("business1", mBusiness);
                 startActivity(intent);
+            }
+        });
+
+        btn_Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = business_personal_review.toString();
             }
         });
 
