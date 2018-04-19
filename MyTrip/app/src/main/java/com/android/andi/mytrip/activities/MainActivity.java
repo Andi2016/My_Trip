@@ -1,3 +1,4 @@
+
 package com.android.andi.mytrip.activities;
 
 
@@ -19,7 +20,6 @@ import com.android.andi.mytrip.Fragments.BusinessListFragment;
 import com.android.andi.mytrip.Fragments.TripListFragment;
 import com.android.andi.mytrip.R;
 import com.android.andi.mytrip.application.MyTrip;
-import com.android.andi.mytrip.asynctasks.GetUserTask;
 import com.android.andi.mytrip.database.AppDatabase;
 import com.android.andi.mytrip.models.User;
 
@@ -28,6 +28,7 @@ import static com.android.andi.mytrip.activities.LaunchActivity.appDatabase;
 public class MainActivity extends AppCompatActivity {
     private MyTrip myTrip;
     public static String error="";
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myTrip = (MyTrip) getApplicationContext();
+        mUser = myTrip.getPreference().getUser(myTrip.getApplicationContext());
 
 
-        GetUserTask getUserTask = new GetUserTask();
-        getUserTask.execute();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = BusinessListFragment.newInstance();;
+                                selectedFragment = TripListFragment.newInstance();
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = BusinessListFragment.newInstance();

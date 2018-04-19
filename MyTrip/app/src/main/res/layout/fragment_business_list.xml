@@ -1,13 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.android.andi.mytrip.Fragments.BusinessListFragment">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:tag="fragment_business_list">
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Atlanta"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/change_city_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Change City"
+        android:textSize="9dp"/>
+
+        <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/city"
+        android:layout_marginBottom="50dp">
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/business_list_recycle"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="11111" />
+        xmlns:android="http://schemas.android.com/apk/res/android" />
 
-</FrameLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</RelativeLayout>

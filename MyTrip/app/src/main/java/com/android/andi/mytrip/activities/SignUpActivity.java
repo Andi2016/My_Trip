@@ -7,13 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.andi.mytrip.R;
 import com.android.andi.mytrip.application.MyTrip;
-import com.android.andi.mytrip.asynctasks.CreateUserTask;
+import com.android.andi.mytrip.models.User;
+import com.android.andi.mytrip.server.ServerAPI;
+import com.android.andi.mytrip.server.ServerResponseCallback;
+import com.android.andi.mytrip.server.ServerResponseData;
+import com.google.gson.Gson;
 
 import java.security.Signer;
 
@@ -104,8 +109,26 @@ public class SignUpActivity extends AppCompatActivity {
         if(cancel){
             focusView.requestFocus();
         }else {
-            CreateUserTask createUserTask = new CreateUserTask();
-            createUserTask.execute(userName, email, password);
+            ServerAPI.CreateUser(myTrip.getApplicationContext(), userName, email, password, new ServerResponseCallback() {
+                @Override
+                public void onResponse(ServerResponseData response) {
+                    Log.e("ffd", response.responseData+ " ");
+                    if (response.statusCode == ServerAPI.STATUS_OK) {
+                        User user = new Gson().fromJson(response.responseData, User.class);
+
+                        myTrip.getPreference().setAppState(SignUpActivity.this,true);
+                        myTrip.getPreference().storeUser(SignUpActivity.this, user);
+
+
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } else {
+                        // Show the error to the user
+
+                    }
+                }
+            });
         }
 
         startActivity(new Intent(SignUpActivity.this, MainActivity.class));

@@ -19,6 +19,7 @@ public class ServerInterface {
     private ServerResponseData mResponseData = new ServerResponseData();
     public static final int LOGIN_REQUIRED = 403;
 
+
     public ServerInterface(String request, ServerResponseCallback callback){
         mRequest = request;
         mCallback = callback;

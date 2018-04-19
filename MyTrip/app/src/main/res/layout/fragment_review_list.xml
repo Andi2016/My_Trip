@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:tag="fragment_business_list">
+
+    <TextView
+        android:id="@+id/businessName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Steamhouse Lounge"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="18dp"/>
+
+
+
+    <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/businessName">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/review_list"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</RelativeLayout>

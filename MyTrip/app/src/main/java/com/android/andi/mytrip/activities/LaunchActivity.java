@@ -25,13 +25,13 @@ public class LaunchActivity extends AppCompatActivity {
         userState = myTrip.getPreference().getAppState(LaunchActivity.this);
         appDatabase = Room.databaseBuilder(myTrip, AppDatabase.class, "My-db").build();
 
-        if(userState){
-            startActivity(new Intent(LaunchActivity.this, MainActivity.class));
-            finish();
-        }else{
-            startActivity(new Intent(LaunchActivity.this, SignUpActivity.class));
+//        if(userState){
+//            startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+//            finish();
+//        }else{
+            startActivity(new Intent(LaunchActivity.this, SignInActivity.class));
             //finish();
-        }
+//        }
     }
 
 }

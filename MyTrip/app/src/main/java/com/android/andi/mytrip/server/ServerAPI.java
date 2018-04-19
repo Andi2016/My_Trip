@@ -27,7 +27,7 @@ public class ServerAPI {
     public static final int STATUS_OK = 200;
     public static final int STATUS_UNKNOWNERROR = -1;
 
-    public static final String SERVER_BASE_URL = "";
+    public static final String SERVER_BASE_URL = "http://143.215.113.90:8082/";
 
     private static AsyncHttpClient client = null;
     private static PersistentCookieStore mCookieStore = null;
@@ -111,9 +111,47 @@ public class ServerAPI {
             top.put("username", username);
             top.put("email", email);
             top.put("password",password);
-        }catch (JSONException e){
+            ServerInterface request = new ServerInterface(url, callback);
+            request.executePostJSON(context, top);
+        } catch (JSONException e){
             e.printStackTrace();
         }
     }
+
+    public static void getUserByEmail(Context context, String email, ServerResponseCallback callback){
+        String url = "/user/email/" + email;
+        try{
+            ServerInterface request = new ServerInterface(url, callback);
+            request.execute(context, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void getBusinessesByCity(Context context, String city, ServerResponseCallback callback) {
+        String url = "/business/city/" + city;
+        try {
+            ServerInterface request = new ServerInterface(url, callback);
+            request.execute(context, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void getReviewsByBusinessId(Context context, String businessId, ServerResponseCallback callback) {
+        String url = "/business/" + businessId + "/review";
+        try {
+            ServerInterface request = new ServerInterface(url, callback);
+            request.execute(context, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }

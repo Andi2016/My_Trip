@@ -1,6 +1,6 @@
 package com.android.andi.mytrip.adapters;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.andi.mytrip.Fragments.BusinessListFragment;
 import com.android.andi.mytrip.R;
+import com.android.andi.mytrip.application.MyTrip;
 import com.android.andi.mytrip.models.Business;
+import com.android.andi.mytrip.utils.GetImageByUrl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +23,16 @@ import java.util.List;
 
 public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder>{
 
-    private final List<Business> mValues;
-    private final BusinessListFragment.OnListFragmentInteractionListener mListener;
+    private List<Business> mBusinesses;
+    private Context mContext;
+    private BusinessListAdapter.BusinessListAdapterListener mListener;
+    private MyTrip mMyTrip;
 
-    public BusinessListAdapter(List<Business> mValues, BusinessListFragment.OnListFragmentInteractionListener listener) {
-        this.mValues = mValues;
+    public BusinessListAdapter(Context context, BusinessListAdapter.BusinessListAdapterListener listener) {
+        this.mBusinesses = new ArrayList<>();
         this.mListener = listener;
+        mContext = context;
+        mMyTrip = (MyTrip) mContext.getApplicationContext();
     }
 
     @Override
@@ -37,12 +43,38 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        Business business = mBusinesses.get(position);
+        String business_name = business.getBusinessName();
+        StringBuilder sb = new StringBuilder();
+        for (String str: business.getAddress()) {
+            sb.append(str);
+            sb.append(" ");
+        }
+        holder.infoView.setText(business_name + "\n" + sb.toString() + "\n" + business.getTag());
+        new GetImageByUrl().setImage(holder.photoView, business.getPhoto_url());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.OnClick(position);
+            }
+        });
+
+    }
+
+    public void clearItems(){
+        mBusinesses.clear();
+    }
+
+    public void addItems(ArrayList<Business> list) {
+        mBusinesses.clear();
+        mBusinesses.addAll(list);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mBusinesses.size();
     }
 
 
@@ -50,23 +82,19 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
         public final View mView;
         public final ImageView photoView;
-        public final TextView nameView;
-        public final TextView tagView;
-        public final TextView priceView;
-        public final TextView distanceView;
-        public final TextView phoneView;
+        public final TextView infoView;
 
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            ImageView = view.findViewById(R.id.business_photo);
-            nameView = view.findViewById(R.id.business_name);
-            tagView = view.findViewById(R.id.business_price);
-            priceView = view.findViewById(R.id.business_price);
-            distanceView = view.findViewById(R.id.business_distance);
-            phoneView = view.findViewById(R.id.business_phone);
-
+            photoView = view.findViewById(R.id.business_photo);
+            infoView = view.findViewById(R.id.business_info);
         }
     }
+
+    public interface BusinessListAdapterListener {
+        void OnClick(int position);
+    }
+
 }
