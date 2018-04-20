@@ -17,7 +17,11 @@ import android.widget.TextView;
 import com.android.andi.mytrip.R;
 import com.android.andi.mytrip.application.MyTrip;
 import com.android.andi.mytrip.models.Business;
+import com.android.andi.mytrip.models.Review;
+import com.android.andi.mytrip.models.User;
 import com.android.andi.mytrip.server.ServerAPI;
+import com.android.andi.mytrip.server.ServerResponseCallback;
+import com.android.andi.mytrip.server.ServerResponseData;
 import com.android.andi.mytrip.utils.GetImageByUrl;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +29,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 
 public class BusinessActivity extends AppCompatActivity implements OnMapReadyCallback{
@@ -57,9 +66,13 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
 
     private Business mBusiness;
 
+    private User mUser;
+
 
     private GoogleMap mMap;
 
+    public BusinessActivity() {
+    }
 
 
     @Override
@@ -68,6 +81,10 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.business_item);
 
         mMyTrip = (MyTrip) getApplicationContext();
+
+        mUser = mMyTrip.getPreference().getUser(mMyTrip.getApplicationContext());
+
+
 
         mImageView= findViewById(R.id.business_photo);
         business_name = findViewById(R.id.businessName);
@@ -78,7 +95,7 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
         business_personal_rating = findViewById(R.id.business_personal_rating);
         business_phone = findViewById(R.id.business_phone);
         business_address = findViewById(R.id.business_address);
-        business_personal_review = findViewById(R.id.business_add_review);
+        business_personal_review = findViewById(R.id.business_personal_review);
         btn_Submit = findViewById(R.id.btn_submit);
 
 
@@ -116,7 +133,19 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
         btn_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str = business_personal_review.toString();
+                String str = business_personal_review.getText().toString();
+                String reviewId = Long.parseLong(mBusiness.getBusinessId()) * 10000 + mBusiness.getReviews().size() + "";
+
+                ServerAPI.postReview(mMyTrip, reviewId, mUser.getUsername(), mBusiness.getBusinessId(), str, business_personal_rating.getRating(), new ServerResponseCallback() {
+                    @Override
+                    public void onResponse(ServerResponseData responseData) {
+                        if (responseData.statusCode == ServerAPI.STATUS_OK) {
+                            business_personal_review.setText("");
+
+                        }
+                    }
+                });
+
             }
         });
 

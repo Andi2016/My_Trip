@@ -14,6 +14,9 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.entity.StringEntity;
 
@@ -152,8 +155,23 @@ public class ServerAPI {
     }
 
 
-    public static void postReview(Context context, String username) {
-        String url = "/user" + username;
+    public static void postReview(Context context, String reviewId, String username, String businessId, String content, double rating, ServerResponseCallback callback) {
+        String url = "/user/" + username + "/review";
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            JSONObject top = new JSONObject();
+            top.put("reviewId", reviewId);
+            top.put("username", username);
+            top.put("businessId", businessId);
+            top.put("content", content);
+            top.put("date",dateFormat.format(new Date()));
+            top.put("rating", rating);
+            ServerInterface request = new ServerInterface(url, callback);
+            request.executePostJSON(context, top);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

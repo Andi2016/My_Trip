@@ -3,24 +3,23 @@ package com.android.andi.mytrip.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by Andi Xu on 3/30/18.
  */
 
 public class Review implements Parcelable {
-    private String review_id;
+    private String reviewId;
     private String username;
     private double rating;
     private String date;
     private String content;
     private String photo_url;
+    private String businessId;
 
     public Review() {}
 
-    public Review(String review_id, String username, double rating, String date, String content, String photo_url) {
-        this.review_id = review_id;
+    public Review(String reviewId, String username, double rating, String date, String content, String photo_url) {
+        this.reviewId = reviewId;
         this.username = username;
         this.rating = rating;
         this.date = date;
@@ -29,12 +28,12 @@ public class Review implements Parcelable {
     }
 
 
-    public String getReview_id() {
-        return review_id;
+    public String getReviewId() {
+        return reviewId;
     }
 
-    public void setReview_id(String review_id) {
-        this.review_id = review_id;
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
     }
 
     public String getUsername() {
@@ -77,6 +76,15 @@ public class Review implements Parcelable {
         this.photo_url = photo_url;
     }
 
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -84,24 +92,26 @@ public class Review implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.review_id);
+        dest.writeString(this.reviewId);
         dest.writeString(this.username);
         dest.writeDouble(this.rating);
         dest.writeString(this.date);
         dest.writeString(this.content);
         dest.writeString(this.photo_url);
+        dest.writeString(this.businessId);
     }
 
     protected Review(Parcel in) {
-        this.review_id = in.readString();
+        this.reviewId = in.readString();
         this.username = in.readString();
         this.rating = in.readDouble();
         this.date = in.readString();
         this.content = in.readString();
         this.photo_url = in.readString();
+        this.businessId = in.readString();
     }
 
-    public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
+    public static final Creator<Review> CREATOR = new Creator<Review>() {
         @Override
         public Review createFromParcel(Parcel source) {
             return new Review(source);

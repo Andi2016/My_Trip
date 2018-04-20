@@ -78,10 +78,10 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         if(cancel){
+
             focusView.requestFocus();
-        }else{
-
-
+            
+        } else {
 
             ServerAPI.getUserByEmail(mMyTrip, email, new ServerResponseCallback() {
                 @Override
