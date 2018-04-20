@@ -78,7 +78,6 @@ public class BusinessActivity extends AppCompatActivity implements OnMapReadyCal
         business_personal_rating = findViewById(R.id.business_personal_rating);
         business_phone = findViewById(R.id.business_phone);
         business_address = findViewById(R.id.business_address);
-        business_personal_review = findViewById(R.id.business_add_review);
         btn_Submit = findViewById(R.id.btn_submit);
 
 

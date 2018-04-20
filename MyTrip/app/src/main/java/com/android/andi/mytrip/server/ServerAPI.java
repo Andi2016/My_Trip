@@ -157,5 +157,19 @@ public class ServerAPI {
 
     }
 
+    /**
+     *This function finds all trips by location
+     */
+
+    public static void getTripsByLocations(Context context, String location, ServerResponseCallback callback) {
+        String url = "/trip/" + location;
+        try {
+            ServerInterface request = new ServerInterface(url, callback);
+            request.execute(context, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

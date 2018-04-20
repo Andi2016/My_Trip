@@ -17,14 +17,21 @@ public class Trip {
     private List<Review> reviews = new ArrayList<>();
     private String description;
 
+    private String status;
+    private String location;
+    private String Photo_url;
+
     public Trip() {}
 
-    public Trip(String trip_id, String trip_name, String username, List<Review> reviews, String description) {
+    public Trip(String trip_id, String trip_name, String username, List<Review> reviews, String description, String status, String location, String photo_url) {
         this.trip_id = trip_id;
         this.trip_name = trip_name;
         this.username = username;
         this.reviews = reviews;
         this.description = description;
+        this.status = status;
+        this.location = location;
+        Photo_url = photo_url;
     }
 
     public String getTrip_id() {
@@ -65,5 +72,29 @@ public class Trip {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhoto_url() {
+        return Photo_url;
+    }
+
+    public void setPhoto_url(String photo_url) {
+        Photo_url = photo_url;
     }
 }
